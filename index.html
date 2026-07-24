@@ -746,9 +746,9 @@
     }
 
     .cta-box {
-      max-width: 700px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 80px 60px;
+      padding: 60px 52px;
       background: linear-gradient(135deg, rgba(123,79,255,0.08), rgba(59,130,246,0.05));
       border: 1px solid rgba(123,79,255,0.2);
       border-radius: 28px;
@@ -780,13 +780,72 @@
     .cta-sub {
       color: var(--text-muted);
       font-size: 1.05rem;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       line-height: 1.6;
     }
 
+    /* CONTACT CARDS */
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.25s ease;
+      text-align: left;
+    }
+
+    .contact-card:hover {
+      background: rgba(123,79,255,0.1);
+      border-color: rgba(123,79,255,0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(123,79,255,0.15);
+    }
+
+    .cc-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      width: 36px;
+      text-align: center;
+    }
+
+    .cc-info { flex: 1; min-width: 0; }
+
+    .cc-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      margin-bottom: 3px;
+    }
+
+    .cc-value {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 0.2s;
+    }
+
+    .contact-card:hover .cc-value { color: var(--text); }
+
     .cta-actions {
       display: flex;
-      gap: 16px;
+      gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -1071,6 +1130,7 @@
             <span class="stack-tag">HTML/CSS</span>
             <span class="stack-tag">JavaScript</span>
           </div>
+          <a href="https://sirsai-agro.vercel.app/" target="_blank" class="project-link">View Sirsai Agro →</a>
         </div>
 
       </div>
@@ -1181,15 +1241,49 @@
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- CTA + CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="cta-box reveal">
         <h2 class="cta-title">Let's build something<br/><span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">real together</span></h2>
         <p class="cta-sub">I'm not looking for just a job. I'm looking for a place to build, learn, and grow fast.</p>
-        <div class="cta-actions">
-          <a href="mailto:itsva.hana@gmail.com" class="btn-primary">Get In Touch →</a>
+
+        <!-- CONTACT CARDS -->
+        <div class="contact-cards">
+          <a href="mailto:sandeshjadhao.rmdstic.comp@gmail.com" class="contact-card">
+            <span class="cc-icon">✉️</span>
+            <div class="cc-info">
+              <div class="cc-label">Email</div>
+              <div class="cc-value">sandeshjadhao.rmdstic.comp@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:+919309459496" class="contact-card">
+            <span class="cc-icon">📞</span>
+            <div class="cc-info">
+              <div class="cc-label">Phone</div>
+              <div class="cc-value">+91-9309459496</div>
+            </div>
+          </a>
+          <a href="https://github.com/SandeshBJadhao" target="_blank" class="contact-card">
+            <span class="cc-icon">⬡</span>
+            <div class="cc-info">
+              <div class="cc-label">GitHub</div>
+              <div class="cc-value">github.com/SandeshBJadhao</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/sandesh-jadhao-07465b26a/" target="_blank" class="contact-card">
+            <span class="cc-icon">💼</span>
+            <div class="cc-info">
+              <div class="cc-label">LinkedIn</div>
+              <div class="cc-value">linkedin.com/in/sandesh-jadhao</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="cta-actions" style="margin-top: 32px;">
+          <a href="mailto:sandeshjadhao.rmdstic.comp@gmail.com" class="btn-primary">✉️ Send Email</a>
           <a href="https://github.com/SandeshBJadhao" target="_blank" class="btn-secondary">⬡ GitHub</a>
+          <a href="https://www.linkedin.com/in/sandesh-jadhao-07465b26a/" target="_blank" class="btn-secondary">💼 LinkedIn</a>
         </div>
       </div>
     </div>
@@ -1199,7 +1293,11 @@
   <footer>
     <span class="footer-logo">Sandesh Jadhao</span>
     <span>Built with AI. Shipped with intent. 🚀</span>
-    <a href="https://github.com/SandeshBJadhao" target="_blank" style="color: var(--text-dim); text-decoration:none; transition: color 0.2s;" onmouseover="this.style.color='#F1F0FF'" onmouseout="this.style.color=''">github.com/SandeshBJadhao</a>
+    <div style="display:flex; gap: 20px; align-items: center;">
+      <a href="mailto:sandeshjadhao.rmdstic.comp@gmail.com" style="color: var(--text-dim); text-decoration:none; transition: color 0.2s; font-size: 0.82rem;" onmouseover="this.style.color='#F1F0FF'" onmouseout="this.style.color=''">✉️ Email</a>
+      <a href="https://github.com/SandeshBJadhao" target="_blank" style="color: var(--text-dim); text-decoration:none; transition: color 0.2s; font-size: 0.82rem;" onmouseover="this.style.color='#F1F0FF'" onmouseout="this.style.color=''">⬡ GitHub</a>
+      <a href="https://www.linkedin.com/in/sandesh-jadhao-07465b26a/" target="_blank" style="color: var(--text-dim); text-decoration:none; transition: color 0.2s; font-size: 0.82rem;" onmouseover="this.style.color='#F1F0FF'" onmouseout="this.style.color=''">💼 LinkedIn</a>
+    </div>
   </footer>
 
   <script>
