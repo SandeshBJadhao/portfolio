@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Email — Sandesh Jadhao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #07060F;
+      --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --purple: #7B4FFF;
+      --purple-light: #A78BFA;
+      --green: #10B981;
+      --text: #F0EEFF;
+      --muted: #8B80B0;
+      --dim: #3D3560;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* TOP LABEL */
+    .top-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-label::before, .top-label::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--dim);
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* EMAIL CARD */
+    .email-card {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+
+    /* EMAIL HEADER */
+    .email-header {
+      background: rgba(123,79,255,0.08);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+
+    .email-field {
+      display: flex;
+      align-items: center;
+      padding: 13px 24px;
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+    }
+
+    .email-field:last-child { border-bottom: none; }
+
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: 60px;
+      flex-shrink: 0;
+    }
+
+    .field-value {
+      font-size: 13.5px;
+      color: var(--text);
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .field-value.email-addr {
+      color: var(--purple-light);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .copy-btn {
+      padding: 5px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: rgba(123,79,255,0.15);
+      border-color: rgba(123,79,255,0.4);
+      color: var(--purple-light);
+    }
+
+    .copy-btn.copied {
+      background: rgba(16,185,129,0.15);
+      border-color: rgba(16,185,129,0.3);
+      color: var(--green);
+    }
+
+    /* EMAIL BODY */
+    .email-body {
+      padding: 32px 36px;
+    }
+
+    .email-body p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(240,238,255,0.85);
+      margin-bottom: 18px;
+    }
+
+    .email-body p:last-child { margin-bottom: 0; }
+
+    .highlight {
+      color: var(--purple-light);
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .bold { font-weight: 700; color: var(--text); }
+
+    .link-text {
+      color: #60A5FA;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .signature {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-top: 4px;
+    }
+
+    .sig-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .sig-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sig-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .sig-link a {
+      color: var(--purple-light);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      transition: color 0.2s;
+    }
+
+    .sig-link a:hover { color: white; }
+
+    /* ACTION BUTTONS */
+    .actions {
+      padding: 20px 36px 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 13px 28px;
+      background: linear-gradient(135deg, #7B4FFF, #3B82F6);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(123,79,255,0.35);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(123,79,255,0.5);
+    }
+
+    .btn-secondary {
+      padding: 13px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    /* TIPS */
+    .tips {
+      width: 100%;
+      max-width: 720px;
+      margin-top: 24px;
+    }
+
+    .tips-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .tip-card {
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .tip-icon { font-size: 18px; flex-shrink: 0; }
+
+    .tip-content {}
+    .tip-card-title { font-size: 11.5px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .tip-card-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+    /* TIMING */
+    .timing-card {
+      width: 100%;
+      max-width: 720px;
+      margin-top: 10px;
+      padding: 16px 20px;
+      background: rgba(16,185,129,0.07);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .timing-icon { font-size: 24px; }
+
+    .timing-text { flex: 1; }
+    .timing-title { font-size: 12px; font-weight: 700; color: var(--green); margin-bottom: 2px; }
+    .timing-desc { font-size: 11.5px; color: var(--muted); }
+
+    .timing-badge {
+      padding: 6px 14px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+
+    .separator {
+      width: 100%;
+      max-width: 720px;
+      margin: 24px 0 0;
+      border: none;
+      border-top: 1px dashed var(--dim);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-label">Phase 4 Complete</div>
+  <h1>Your Application Email 📩</h1>
+  <p class="subtitle">Ready to send to Hana — copy each field below and paste into Gmail</p>
+
+  <!-- EMAIL CARD -->
+  <div class="email-card">
+
+    <!-- FIELDS -->
+    <div class="email-header">
+      <div class="email-field">
+        <span class="field-label">To</span>
+        <span class="field-value email-addr">itsva.hana@gmail.com</span>
+        <button class="copy-btn" onclick="copyText('itsva.hana@gmail.com', this)">Copy</button>
+      </div>
+      <div class="email-field">
+        <span class="field-label">Subject</span>
+        <span class="field-value">Founder's Associate Application — AI Builder from India, Ready to Build with You</span>
+        <button class="copy-btn" onclick="copyText(`Founder's Associate Application — AI Builder from India, Ready to Build with You`, this)">Copy</button>
+      </div>
+      <div class="email-field">
+        <span class="field-label">Attach</span>
+        <span class="field-value" style="color: var(--muted);">📎 Sandesh_Jadhao_Resume.pdf &nbsp;·&nbsp; Save resume.html as PDF first (Ctrl+P)</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="email-body" id="emailBody">
+
+      <p>Hi Hana,</p>
+
+      <p>I came across your post and one line stopped me — <span class="highlight">"I'm looking for someone who wants to build companies, not just work for one."</span> That's exactly how I think.</p>
+
+      <p>My name is <span class="bold">Sandesh Jadhao</span>. I'm a Computer Science student from India and I've been building seriously with AI for a while now.</p>
+
+      <p><span class="bold">AI tools I use daily:</span> Claude, ChatGPT, Antigravity, Codex, Cursor — AI isn't something I experiment with. It's how I actually get work done.</p>
+
+      <p><span class="bold">What I've built:</span></p>
+
+      <p>
+        🏛️ <span class="bold">APMC Malkapur</span> — A full government agriculture marketplace built with Next.js + Supabase. Includes live market rates, admin panel, farmer tracking, multilingual support, and 10+ database migrations. Solo built and deployed on Vercel. <a class="link-text" href="https://malkapur-apmc.vercel.app/" target="_blank">malkapur-apmc.vercel.app</a>
+      </p>
+
+      <p>
+        🏠 <span class="bold">Real Estate AI Automation (US Market)</span> — Built an end-to-end pipeline for US-based real estate agents that handles inbound calls and automates follow-ups using connected AI tools — zero manual work after setup.
+      </p>
+
+      <p>
+        📋 <span class="bold">Recruitment Data Pipeline</span> — An automation for recruitment agencies that extracts candidate data from multiple sources and pushes it into a custom-branded frontend — saving hours of manual entry daily.
+      </p>
+
+      <p>
+        <span class="bold">On marketing:</span> I don't have years of experience, but I deeply understand that convincing different people with the same product requires entirely different approaches. That fascinates me and I want to learn it the right way — by doing it with you.
+      </p>
+
+      <p>
+        <span class="bold">On location:</span> I'm based in India, but I'm fully open to remote and committed to showing up reliably across time zones. Distance has never stopped me from delivering.
+      </p>
+
+      <p>
+        🌐 <span class="bold">Portfolio:</span> <a class="link-text" href="https://sandeshbjadhao.github.io/portfolio/" target="_blank">sandeshbjadhao.github.io/portfolio</a><br/>
+        ⬡ <span class="bold">GitHub:</span> <a class="link-text" href="https://github.com/SandeshBJadhao" target="_blank">github.com/SandeshBJadhao</a>
+      </p>
+
+      <p>I read your caption carefully before reaching out. I'm not looking for a job — I'm looking for a place to build.</p>
+
+      <p>Looking forward to hearing from you.</p>
+
+      <div class="signature">
+        <div class="sig-name">Sandesh Jadhao</div>
+        <div class="sig-links">
+          <div class="sig-link">📞 <a href="tel:+919309459496">+91-9309459496</a></div>
+          <div class="sig-link">🌐 <a href="https://sandeshbjadhao.github.io/portfolio/" target="_blank">sandeshbjadhao.github.io/portfolio</a></div>
+          <div class="sig-link">⬡ <a href="https://github.com/SandeshBJadhao" target="_blank">github.com/SandeshBJadhao</a></div>
+          <div class="sig-link">💼 <a href="https://www.linkedin.com/in/sandesh-jadhao-07465b26a/" target="_blank">linkedin.com/in/sandesh-jadhao</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button class="btn-primary" onclick="copyFullEmail()">📋 Copy Full Email</button>
+      <button class="btn-secondary" onclick="openGmail()">📨 Open Gmail</button>
+      <button class="btn-secondary" onclick="window.open('https://sandeshbjadhao.github.io/portfolio/', '_blank')">🌐 Preview Portfolio</button>
+    </div>
+
+  </div>
+
+  <!-- TIMING -->
+  <div class="timing-card">
+    <span class="timing-icon">⏰</span>
+    <div class="timing-text">
+      <div class="timing-title">Best Time to Send</div>
+      <div class="timing-desc">Send when it's 9:00–10:00 AM in Los Angeles (PST) for maximum visibility</div>
+    </div>
+    <div class="timing-badge">10:30–11:30 PM IST</div>
+  </div>
+
+  <!-- TIPS -->
+  <hr class="separator" />
+  <div class="tips">
+    <div class="tips-title">Before You Send — Checklist</div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <span class="tip-icon">📎</span>
+        <div class="tip-content">
+          <div class="tip-card-title">Attach Resume PDF</div>
+          <div class="tip-card-desc">Open resume.html → Ctrl+P → Save as PDF → attach to email</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">📸</span>
+        <div class="tip-content">
+          <div class="tip-card-title">Read the Caption</div>
+          <div class="tip-card-desc">She pinned "read the caption first" — your email already does this ✅</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">⏱️</span>
+        <div class="tip-content">
+          <div class="tip-card-title">Send at Right Time</div>
+          <div class="tip-card-desc">Tonight at 10:30 PM IST = 9 AM her time. Fresh inbox = better shot</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">💬</span>
+        <div class="tip-content">
+          <div class="tip-card-title">Follow Her on Instagram</div>
+          <div class="tip-card-desc">@theahhan — engage genuinely with a real comment, not just a like</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🎥</span>
+        <div class="tip-content">
+          <div class="tip-card-title">Bonus: Loom Video</div>
+          <div class="tip-card-desc">Record a 60-sec walkthrough of APMC on loom.com — almost no one does this</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🔁</span>
+        <div class="tip-content">
+          <div class="tip-card-title">Follow Up If No Reply</div>
+          <div class="tip-card-desc">Wait 4–5 days, then send a short 2-line follow-up. Polite persistence works</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function copyText(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = '✓ Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function copyFullEmail() {
+      const emailText = `Hi Hana,
+
+I came across your post and one line stopped me — "I'm looking for someone who wants to build companies, not just work for one." That's exactly how I think.
+
+My name is Sandesh Jadhao. I'm a Computer Science student from India and I've been building seriously with AI for a while now.
+
+AI tools I use daily: Claude, ChatGPT, Antigravity, Codex, Cursor — AI isn't something I experiment with. It's how I actually get work done.
+
+What I've built:
+
+🏛️ APMC Malkapur — A full government agriculture marketplace built with Next.js + Supabase. Includes live market rates, admin panel, farmer tracking, multilingual support, and 10+ database migrations. Solo built and deployed on Vercel.
+Live: https://malkapur-apmc.vercel.app/
+
+🏠 Real Estate AI Automation (US Market) — Built an end-to-end pipeline for US-based real estate agents that handles inbound calls and automates follow-ups using connected AI tools — zero manual work after setup.
+
+📋 Recruitment Data Pipeline — An automation for recruitment agencies that extracts candidate data from multiple sources and pushes it into a custom-branded frontend — saving hours of manual entry daily.
+
+On marketing: I don't have years of experience, but I deeply understand that convincing different people with the same product requires entirely different approaches. That fascinates me and I want to learn it the right way — by doing it with you.
+
+On location: I'm based in India, but I'm fully open to remote and committed to showing up reliably across time zones. Distance has never stopped me from delivering.
+
+🌐 Portfolio: https://sandeshbjadhao.github.io/portfolio/
+⬡ GitHub: https://github.com/SandeshBJadhao
+
+I read your caption carefully before reaching out. I'm not looking for a job — I'm looking for a place to build.
+
+Looking forward to hearing from you.
+
+Sandesh Jadhao
++91-9309459496
+https://sandeshbjadhao.github.io/portfolio/
+https://github.com/SandeshBJadhao
+https://www.linkedin.com/in/sandesh-jadhao-07465b26a/`;
+
+      navigator.clipboard.writeText(emailText).then(() => {
+        const btn = document.querySelector('.btn-primary');
+        const original = btn.innerHTML;
+        btn.innerHTML = '✓ Copied to Clipboard!';
+        btn.style.background = 'linear-gradient(135deg, #059669, #10B981)';
+        setTimeout(() => {
+          btn.innerHTML = original;
+          btn.style.background = '';
+        }, 2500);
+      });
+    }
+
+    function openGmail() {
+      const subject = encodeURIComponent("Founder's Associate Application — AI Builder from India, Ready to Build with You");
+      const to = encodeURIComponent("itsva.hana@gmail.com");
+      window.open(`https://mail.google.com/mail/?view=cm&to=${to}&su=${subject}`, '_blank');
+    }
+  </script>
+</body>
+</html>

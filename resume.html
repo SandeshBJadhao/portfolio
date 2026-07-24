@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sandesh Jadhao — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #CBD5E1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 16px 50px;
+      min-height: 100vh;
+    }
+
+    .print-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #475569;
+      margin-bottom: 16px;
+      background: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .print-hint strong { color: #7C3AED; }
+
+    /* ========== RESUME PAGE ========== */
+    .resume {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── TOP HEADER ─── */
+    .header {
+      background: #1E1138;
+      padding: 28px 36px 22px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .header-left {}
+
+    .name {
+      font-size: 26px;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .role-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #A78BFA;
+      margin-bottom: 10px;
+    }
+
+    .summary-text {
+      font-size: 11px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+      max-width: 380px;
+      border-left: 2px solid #7C3AED;
+      padding-left: 10px;
+    }
+
+    .header-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding-top: 2px;
+    }
+
+    .contact-row {
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+    }
+
+    .contact-row a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+    }
+
+    .contact-row a:hover { color: #A78BFA; }
+
+    /* ─── AI STACK BAR ─── */
+    .ai-bar {
+      background: #F3EEFF;
+      border-bottom: 1px solid #DDD6FE;
+      padding: 8px 36px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ai-bar-label {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7C3AED;
+      white-space: nowrap;
+    }
+
+    .ai-pill {
+      padding: 2px 9px;
+      background: white;
+      border: 1px solid #C4B5FD;
+      border-radius: 20px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #6D28D9;
+    }
+
+    /* ─── TWO-COLUMN BODY ─── */
+    .body {
+      display: grid;
+      grid-template-columns: 62% 38%;
+      flex: 1;
+    }
+
+    /* ─── MAIN COLUMN ─── */
+    .main {
+      padding: 20px 22px 20px 36px;
+      border-right: 1px solid #EDE9FE;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      padding: 20px 28px 20px 20px;
+      background: #FAFAFE;
+    }
+
+    /* ─── SECTION ─── */
+    .sec { margin-bottom: 18px; }
+    .sec:last-child { margin-bottom: 0; }
+
+    .sec-title {
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7C3AED;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #EDE9FE;
+      margin-bottom: 10px;
+    }
+
+    /* ─── AUTOMATION CARD ─── */
+    .auto-card {
+      border: 1px solid #EDE9FE;
+      border-radius: 6px;
+      padding: 10px 12px 10px 14px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .auto-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 6px 0 0 6px;
+    }
+
+    .auto-card.re::before { background: linear-gradient(to bottom, #06B6D4, #7C3AED); }
+    .auto-card.rec::before { background: linear-gradient(to bottom, #7C3AED, #EC4899); }
+    .auto-card:last-child { margin-bottom: 0; }
+
+    .auto-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .auto-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #1E1138;
+    }
+
+    .auto-badge {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #7C3AED;
+      background: #F3EEFF;
+      border: 1px solid #DDD6FE;
+      border-radius: 4px;
+      padding: 1px 7px;
+    }
+
+    .auto-desc {
+      font-size: 10px;
+      color: #64748B;
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .fn {
+      font-size: 8.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .fn-ai { background: #EDE9FE; color: #6D28D9; }
+    .fn-svc { background: #ECFEFF; color: #0891B2; }
+    .fn-out { background: #ECFDF5; color: #059669; }
+    .fn-arr { color: #94A3B8; font-size: 9px; }
+
+    /* ─── PROJECT ITEM ─── */
+    .proj {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #E2E8F0;
+    }
+
+    .proj:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .proj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 3px;
+    }
+
+    .proj-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1E1138;
+    }
+
+    .proj-date {
+      font-size: 9px;
+      color: #94A3B8;
+      font-weight: 500;
+      white-space: nowrap;
+      margin-left: 6px;
+      margin-top: 1px;
+    }
+
+    .proj-sub {
+      font-size: 9.5px;
+      color: #7C3AED;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .proj-desc {
+      font-size: 10px;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 5px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+
+    .tag {
+      font-size: 8.5px;
+      font-weight: 600;
+      padding: 1.5px 7px;
+      border-radius: 3px;
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #E2E8F0;
+    }
+
+    /* ─── INTERNSHIP ─── */
+    .intern-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1E1138;
+      margin-bottom: 2px;
+    }
+
+    .intern-meta {
+      font-size: 9.5px;
+      color: #7C3AED;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .intern-desc {
+      font-size: 10px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    /* ─── SIDEBAR COMPONENTS ─── */
+    .avail-box {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .avail-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      flex-shrink: 0;
+    }
+
+    .avail-text {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #065F46;
+    }
+
+    .avail-note {
+      font-size: 9.5px;
+      color: #6B7280;
+      line-height: 1.55;
+    }
+
+    /* skill groups */
+    .skill-group { margin-bottom: 8px; }
+    .skill-group:last-child { margin-bottom: 0; }
+
+    .sg-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94A3B8;
+      margin-bottom: 4px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+
+    .chip {
+      font-size: 9px;
+      font-weight: 500;
+      padding: 2px 8px;
+      background: white;
+      border: 1px solid #E2E8F0;
+      border-radius: 3px;
+      color: #374151;
+    }
+
+    /* edu */
+    .edu-item { margin-bottom: 9px; }
+    .edu-item:last-child { margin-bottom: 0; }
+
+    .edu-school {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #1E1138;
+      margin-bottom: 1px;
+    }
+
+    .edu-deg {
+      font-size: 9.5px;
+      color: #475569;
+      margin-bottom: 2px;
+    }
+
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .edu-score {
+      font-size: 9px;
+      font-weight: 700;
+      color: #7C3AED;
+    }
+
+    .edu-yr {
+      font-size: 9px;
+      color: #94A3B8;
+    }
+
+    /* achieve */
+    .ach-item {
+      display: flex;
+      gap: 6px;
+      font-size: 9.5px;
+      color: #475569;
+      line-height: 1.55;
+      margin-bottom: 5px;
+    }
+
+    .ach-item::before {
+      content: '▸';
+      color: #7C3AED;
+      font-size: 8px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .ach-item:last-child { margin-bottom: 0; }
+
+    /* links */
+    .web-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      margin-bottom: 4px;
+    }
+
+    .web-link span { color: #94A3B8; width: 12px; text-align: center; }
+    .web-link a { color: #6D28D9; text-decoration: none; }
+
+    /* ========== PRINT ========== */
+    @media print {
+      body { background: white; padding: 0; }
+      .print-hint { display: none; }
+      .resume { box-shadow: none; width: 100%; min-height: auto; }
+      @page { margin: 0; size: A4; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-hint">💡 To save as PDF: Press <strong>Ctrl+P</strong> → Destination: <strong>Save as PDF</strong> → Margins: <strong>None</strong></div>
+
+<div class="resume">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="name">Sandesh Bhagwan Jadhao</div>
+      <div class="role-title">AI Builder &nbsp;·&nbsp; Full-Stack Developer &nbsp;·&nbsp; Open to Remote</div>
+      <div class="summary-text">
+        AI-native CS undergraduate who ships real products. I use Claude, ChatGPT, Antigravity and Codex daily to build full-stack apps and AI automation pipelines — not just prototypes. Looking to join an AI-first founder building companies from the ground up.
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="contact-row">📞 +91-9309459496</div>
+      <div class="contact-row"><a href="mailto:sandeshjadhao.rmdstic.comp@gmail.com">sandeshjadhao.rmdstic.comp@gmail.com</a></div>
+      <div class="contact-row"><a href="https://github.com/SandeshBJadhao" target="_blank">github.com/SandeshBJadhao</a></div>
+      <div class="contact-row"><a href="https://www.linkedin.com/in/sandesh-jadhao-07465b26a/" target="_blank">linkedin.com/in/sandesh-jadhao</a></div>
+      <div class="contact-row"><a href="https://sandeshbjadhao.github.io/portfolio/" target="_blank">🌐 sandeshbjadhao.github.io/portfolio</a></div>
+      <div class="contact-row">📍 Pune, Maharashtra, India</div>
+    </div>
+  </div>
+
+  <!-- AI STACK BAR -->
+  <div class="ai-bar">
+    <span class="ai-bar-label">Daily AI Stack →</span>
+    <span class="ai-pill">Claude</span>
+    <span class="ai-pill">ChatGPT</span>
+    <span class="ai-pill">Antigravity</span>
+    <span class="ai-pill">Codex</span>
+    <span class="ai-pill">Cursor</span>
+    <span class="ai-pill">n8n</span>
+    <span class="ai-pill">Supabase AI</span>
+    <span class="ai-pill">Vercel v0</span>
+  </div>
+
+  <!-- TWO-COLUMN BODY -->
+  <div class="body">
+
+    <!-- ── MAIN ── -->
+    <div class="main">
+
+      <!-- AI AUTOMATIONS -->
+      <div class="sec">
+        <div class="sec-title">AI Automations Built</div>
+
+        <div class="auto-card re">
+          <div class="auto-header">
+            <div class="auto-title">🏠 Real Estate Call & Follow-up Automation</div>
+            <div class="auto-badge">US Market</div>
+          </div>
+          <div class="auto-desc">End-to-end AI pipeline for US real estate agents. Handles inbound call routing, auto-generates personalised follow-up messages and manages client communication sequences — zero manual effort after setup.</div>
+          <div class="flow">
+            <span class="fn fn-ai">AI Agent</span>
+            <span class="fn-arr">→</span>
+            <span class="fn fn-svc">Call Handler</span>
+            <span class="fn-arr">→</span>
+            <span class="fn fn-svc">CRM</span>
+            <span class="fn-arr">→</span>
+            <span class="fn fn-out">Auto Follow-up</span>
+          </div>
+        </div>
+
+        <div class="auto-card rec">
+          <div class="auto-header">
+            <div class="auto-title">📋 Recruitment Data Extraction Pipeline</div>
+            <div class="auto-badge">B2B Tool</div>
+          </div>
+          <div class="auto-desc">Automated pipeline for recruitment agencies — extracts candidate & job data from multiple sources, parses via AI, and populates a custom-branded frontend dashboard. Saves hours of manual entry daily.</div>
+          <div class="flow">
+            <span class="fn fn-svc">Data Sources</span>
+            <span class="fn-arr">→</span>
+            <span class="fn fn-ai">AI Parser</span>
+            <span class="fn-arr">→</span>
+            <span class="fn fn-svc">Processor</span>
+            <span class="fn-arr">→</span>
+            <span class="fn fn-out">Custom Dashboard</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="sec">
+        <div class="sec-title">Projects Shipped</div>
+
+        <div class="proj">
+          <div class="proj-header">
+            <div class="proj-title">APMC Malkapur — Government Agriculture Portal</div>
+            <div class="proj-date">Jun – Jul 2026</div>
+          </div>
+          <div class="proj-sub">malkapur-apmc.vercel.app</div>
+          <div class="proj-desc">Full-stack government marketplace with live market rates, farmer arrival tracking, multilingual support, admin dashboard with protected routes & 10+ Supabase DB migrations. Solo built & deployed.</div>
+          <div class="tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">REST API</span>
+            <span class="tag">Vercel</span>
+            <span class="tag">Auth</span>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-header">
+            <div class="proj-title">Sirsai Agro Website</div>
+            <div class="proj-date">Mar – Apr 2026</div>
+          </div>
+          <div class="proj-sub">sirsai-agro.vercel.app</div>
+          <div class="proj-desc">Responsive agriculture business site with product showcase, services & contact. Mobile-first, performance optimised, deployed on Vercel.</div>
+          <div class="tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">React</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">Vercel</span>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-header">
+            <div class="proj-title">LeadForge — Lead Generation Tool</div>
+            <div class="proj-date">2026</div>
+          </div>
+          <div class="proj-desc">Custom web app that scrapes, filters and exports qualified leads to Excel. No backend dependency — runs entirely in the browser.</div>
+          <div class="tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML / CSS</span>
+            <span class="tag">Excel Export</span>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-header">
+            <div class="proj-title">Habit Tracker App</div>
+            <div class="proj-date">Jan – Feb 2026</div>
+          </div>
+          <div class="proj-sub">habit-tracker-five-ashen.vercel.app</div>
+          <div class="proj-desc">Habit tracking web app with CRUD operations, authentication and persistent data storage via Supabase.</div>
+          <div class="tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Auth</span>
+            <span class="tag">Tailwind</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERNSHIP -->
+      <div class="sec">
+        <div class="sec-title">Internship</div>
+        <div class="intern-title">Full Stack Developer Intern — Iskcon Sanjeevni IT Cell</div>
+        <div class="intern-meta">
+          <span>IT / Software</span>
+          <span>Jan 2026 – Feb 2026</span>
+        </div>
+        <div class="intern-desc">Built a full-stack web app using Next.js, Tailwind CSS, Supabase & Vercel. Implemented secure authentication, database integration, and deployed with scalable cloud architecture.</div>
+        <div class="tags" style="margin-top:5px;">
+          <span class="tag">Next.js</span>
+          <span class="tag">React</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Vercel</span>
+          <span class="tag">Auth</span>
+          <span class="tag">Node.js</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── SIDEBAR ── -->
+    <div class="sidebar">
+
+      <!-- AVAILABILITY -->
+      <div class="sec">
+        <div class="sec-title">Availability</div>
+        <div class="avail-box">
+          <div class="avail-dot"></div>
+          <div class="avail-text">Open to Remote Work</div>
+        </div>
+        <div class="avail-note">Based in <strong>Pune, India 🇮🇳</strong><br/>Available across all time zones.<br/>Full ownership & reliable delivery.</div>
+      </div>
+
+      <!-- TECH SKILLS -->
+      <div class="sec">
+        <div class="sec-title">Tech Skills</div>
+
+        <div class="skill-group">
+          <div class="sg-label">Frontend</div>
+          <div class="chips">
+            <span class="chip">Next.js</span>
+            <span class="chip">React</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Tailwind CSS</span>
+            <span class="chip">HTML / CSS</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="sg-label">Backend & Database</div>
+          <div class="chips">
+            <span class="chip">Supabase</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">REST API</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="sg-label">DevOps & Tools</div>
+          <div class="chips">
+            <span class="chip">Vercel</span>
+            <span class="chip">Git</span>
+            <span class="chip">GitHub</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="sg-label">AI & Automation</div>
+          <div class="chips">
+            <span class="chip">Prompt Engineering</span>
+            <span class="chip">AI Workflows</span>
+            <span class="chip">n8n</span>
+            <span class="chip">API Chaining</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="sec">
+        <div class="sec-title">Education</div>
+
+        <div class="edu-item">
+          <div class="edu-school">RMD Sinhgad College of Engineering</div>
+          <div class="edu-deg">B.E. Computer Science & Engineering</div>
+          <div class="edu-row">
+            <span class="edu-score">CGPA: 7.47 / 10</span>
+            <span class="edu-yr">2023 – 2027</span>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-school">Cambridge Sr. Secondary School</div>
+          <div class="edu-deg">12th — CBSE</div>
+          <div class="edu-row">
+            <span class="edu-score">67 / 100</span>
+            <span class="edu-yr">2023</span>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-school">MSM English School, Malkapur</div>
+          <div class="edu-deg">10th — CBSE</div>
+          <div class="edu-row">
+            <span class="edu-score">75.80 / 100</span>
+            <span class="edu-yr">2021</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACHIEVEMENTS -->
+      <div class="sec">
+        <div class="sec-title">Achievements</div>
+        <div class="ach-item">Completed 2 Full Stack development internships</div>
+        <div class="ach-item">Shipped 6+ production-ready web apps solo</div>
+        <div class="ach-item">Built 2 independent AI automation pipelines for US businesses</div>
+        <div class="ach-item">Deployed govt-grade APMC portal — live with real users</div>
+      </div>
+
+      <!-- WEB LINKS -->
+      <div class="sec">
+        <div class="sec-title">Links</div>
+        <div class="web-link"><span>🌐</span><a href="https://sandeshbjadhao.github.io/portfolio/">sandeshbjadhao.github.io/portfolio</a></div>
+        <div class="web-link"><span>⬡</span><a href="https://github.com/SandeshBJadhao">github.com/SandeshBJadhao</a></div>
+        <div class="web-link"><span>💼</span><a href="https://www.linkedin.com/in/sandesh-jadhao-07465b26a/">linkedin.com/in/sandesh-jadhao</a></div>
+        <div class="web-link"><span>🚀</span><a href="https://malkapur-apmc.vercel.app/">malkapur-apmc.vercel.app</a></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
